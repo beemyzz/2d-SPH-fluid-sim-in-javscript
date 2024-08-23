@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/gh/RonenNess/Vector2js/dist/vector2js.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+</head>
+<h1>Sph Fluid Simulation</h1>
+<div id="topcontainer">
+
+
+    <div id="mediacontrols">
+        <label for="mediacontrols">Pause/Next Frame</label>
+        <button id="pause" name="Pause"  ><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Play_Pause_icon_2283501.svg/1024px-Play_Pause_icon_2283501.svg.png"></button>
+        <button id="skip" name="skip"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Fast_forward_font_awesome.svg/1024px-Fast_forward_font_awesome.svg.png"></button>
+    </div> 
+
+</div>
+
+
+  <canvas  id="canvas" onmousemove="updateuserparticle(event)" width="200" height="200">  
+  </canvas>
+
+
+    
+</div>
+
+
+  <div id="settings-container">
+
+    <div class="slider">
+        <label for="viscoscity">Viscosity:</label>
+        <input type="range" id="viscoscity" name="viscoscity" min="0" max="10" value="6">
+    </div>
+    <div class="slider">
+        <label for="restdensity">Rest Density:</label>
+        <input type="range" id="restdensity" name="restdensity" min="0" max="10" value=" 1">
+    </div>
+    <div class="slider">
+        <label for="pressuremultiplier">Pressure Multiplier:</label>
+        <input type="range" id="pressuremultiplier" name="pressuremultiplier" min="0" max="18" value=" 3">
+    </div>
+    <div class="slider">
+        <label for="gravity">Gravity:</label>
+        <input type="range" id="gravity" name="gravity" min="0" max="100" value="50">
+    </div>
+    <div class="slider">
+      <label for="ballradius">Ball Radius:</label>
+      <input type="range" id="ballradius" name="ballradius" min="1" max="9" value="2" step = 0.01>
+  </div>
+    <div class="input-container">
+      <label for="particlecolours">Toggle speed colours</label>
+      <input type="checkbox" id="particlecolours" name="particlecolours" class="input-switch">
+  
+  </div>
+  <div class="input-container">
+      <label for="numparticles">Number of Particles:</label>
+      <input type="number" id="numparticles" name="numparticles" min="0" max="1600">
+  
+  </div>
+    <button id="Restart" name="Restart">Restart Simulation</button>
+
+
+
+    
+
+</div>
+<script src="particle.js"></script>
+<script src="quadtree.js" ></script>
+<script src="SPHFluidsimulator.js"></script>
+<script src="sketch.js"></script>
+
+</body>
+
+</html>

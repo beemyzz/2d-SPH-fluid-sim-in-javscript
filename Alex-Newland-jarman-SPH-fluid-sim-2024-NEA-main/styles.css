@@ -1,0 +1,51 @@
+canvas{
+    border: 1px solid black;
+
+}
+button img {
+    width: 20px; 
+    height: 20px;
+}
+#mousecontrols{
+    background-color: black;
+    border-radius: 25px;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+
+#topcontainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+    #settings-container {
+        width: 300px; 
+        height: 300px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    
+
+    .slider {
+        margin-bottom: 10px;
+    }
+
+#userinputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.input-container {
+    text-align: center;
+}
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+}
