@@ -3,7 +3,7 @@ I implemented a 2d fluid simulation in javascript using a particle based approac
 
 # Steps to Use
 Simply download the whole contents of the folder and open index.html in your browser from their you will see various settings to customize the experience in real time
-## Simulation Interface features
+## Simulation User Interface features
 * Pause/Play and Step 
 * Viscosity Scale bar
 * Rest Density Scale bar
