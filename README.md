@@ -1,3 +1,6 @@
+# Link to view online
+https://rawcdn.githack.com/beemyzz/2d-SPH-fluid-sim-in-javscript/93a6a4599aea6f0f25d0b52251b082e743f7d2b5/Alex-Newland-jarman-SPH-fluid-sim-2024-NEA-main/index.html
+
 # 2d-SPH-fluid-sim-in-javscript
 I implemented a 2d fluid simulation in javascript using a particle based approach A fluid is a substance that has no fixed shape and is able to flow (water is a fluid). In smoothed particle hydrodynamics the fluid is divided into discrete particles with mass. You could imagine them as water droplets. The effect of each particle on another particle drastically decreases as the distance gets higher until it is 0. We can determine the exact influence of a particle using a smoothing kernel.This allows for realistic fluid physics with limited equations. If you would like to learn more I have attached a pdf with references I have used to assist me.
 
