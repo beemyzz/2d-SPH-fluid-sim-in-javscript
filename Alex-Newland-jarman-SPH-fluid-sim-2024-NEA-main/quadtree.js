@@ -6,9 +6,7 @@ class Point {
       this.y = y;
       this.pointdata =pointdata
     }
-    getpointdata(){
-      return this.pointdata
-    }
+
 }
 
 class Rectangle {

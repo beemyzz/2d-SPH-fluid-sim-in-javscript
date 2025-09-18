@@ -5,7 +5,7 @@ class Particle{
         this.velocity = new Vector(0,0);
         this.acceleration = fluidSimulator.gravity
         this.radius = radius;
-        this.smoothinglength = smoothinglength
+        this.smoothinglength = radius*2
         this.mass =1;
         this.density = 1;
         this.pressure =1;
@@ -21,9 +21,14 @@ class Particle{
         this.position = this.position.add(this.velocity.mulScalar(fluidSimulator.timestep));
 
     }
-    updateacceleration(nearbypoints){
-        this.calcdensityandpressure(nearbypoints);
-        this.updateforces(nearbypoints);
+    updateacceleration(){
+
+        const preciseRange = new Circle(this.position.x, this.position.y, this.smoothinglength * 2)
+        const neighbours = qtree.query(preciseRange);
+        
+        
+        this.calcdensityandpressure(neighbours);
+        this.updateforces(neighbours);
         this.currentforce = fluidSimulator.gravity
         this.currentforce = this.currentforce.add(this.viscosityforce).sub(this.pressureforce)
         this.acceleration = this.currentforce.divScalar(this.density);
@@ -34,9 +39,9 @@ class Particle{
     calcdensityandpressure(nearbypoints){
         let density = 0;
         for (let cparticle of nearbypoints){
-            if (cparticle.userball == false){
+            if (cparticle.userball === false){
                     
-                if (cparticle != self){
+                if (cparticle !== self){
                     let distance = this.position.distanceFrom(cparticle.position);
                     density += cparticle.mass * fluidSimulator.poly6kernel(distance,this.smoothinglength,this.numX)
                     }
@@ -46,7 +51,7 @@ class Particle{
                 if (densityerror < 0){
                     densityerror = 0
                 }
-                this.pressure = fluidSimulator.pressuremultiplier*(densityerror);
+                this.pressure = Math.max(fluidSimulator.pressuremultiplier*(densityerror),0);
         
         }
     }
@@ -59,10 +64,10 @@ class Particle{
         for (let cparticle of nearbypoints) {
 
 
-            if (cparticle.particle != this.position && cparticle.userball == false){
+            if (cparticle.particle !== this && cparticle.userball === false){
                 let distance = this.position.distanceFrom(cparticle.position);
                 if (distance !== 0){
-                    
+
                 let directionvector = cparticle.position.sub(this.position).normalize();
                 pressurecontribution = ((this.pressure + cparticle.pressure)/(2*cparticle.density) * cparticle.mass * fluidSimulator.spikykernelderrivative(distance, this.smoothinglength));
                 pressureforce = pressureforce.sub(directionvector.mulScalar(pressurecontribution));
@@ -70,9 +75,11 @@ class Particle{
 
 
                 }
-                     
+
             }
         }
+
+        
 
         this.viscosityforce = viscositycontribution;
         this.pressureforce = pressureforce;
@@ -81,7 +88,7 @@ class Particle{
     }
     checkboundarys(){
         if (this.position.x - this.radius < 0.0) {
-          this.position.x = 0.0 + this.radius;
+          this.position.x =  this.radius;
           this.velocity.x = -fluidSimulator.collisionDamping*this.velocity.x;
         }
       
@@ -91,7 +98,7 @@ class Particle{
         }
         
         if (this.position.y - this.radius < 0.0) {
-            this.position.y = 0.0 + this.radius;
+            this.position.y =  this.radius;
             this.velocity.y = -fluidSimulator.collisionDamping*this.velocity.y;
         }
         
@@ -125,7 +132,7 @@ class Particle{
         c.fill();
     }
     handlecollision(particle) {
-        if(this != particle){
+        if(this !== particle){
 
             let distance = this.position.distanceFrom(particle.position);
             let minDistance = this.radius + particle.radius;
